@@ -2,7 +2,6 @@ package com.ansh.giglassignment.data.models
 
 
 
-
 data class TimelineItem(
     val id: String,
     val itemType: Int,

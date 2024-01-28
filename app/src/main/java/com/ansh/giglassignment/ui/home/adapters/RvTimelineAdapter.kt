@@ -3,10 +3,14 @@ package com.ansh.giglassignment.ui.home.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ansh.giglassignment.R
 import com.ansh.giglassignment.data.models.TimelineItem
+import com.ansh.giglassignment.data.models.VideoItem
 import com.ansh.giglassignment.databinding.RvTimelinePostItemLayoutBinding
 import com.ansh.giglassignment.databinding.RvTimelineShortsItemLayoutBinding
 import com.ansh.giglassignment.databinding.RvTimelineVideoItemLayoutBinding
+import com.ansh.giglassignment.utils.UrlUtils.openYouTubeLink
+import com.bumptech.glide.Glide
 
 
 class RvTimelineAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -70,7 +74,11 @@ class RvTimelineAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: TimelineItem) {
-            binding
+            binding.tvTitle.text=item.postItem?.title
+            binding.tvDescription.text=item.postItem?.description
+            Glide.with(binding.root).load(item.postItem?.thumbnailUrl.toString()).placeholder(R.drawable.ic_youtube).into(binding.ivThumbnail)
+            Glide.with(binding.root).load(item.postItem?.thumbnailUrl.toString()).placeholder(R.drawable.ic_youtube).into(binding.SIVProfile)
+
         }
 
     }
@@ -91,6 +99,15 @@ class RvTimelineAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: TimelineItem) {
+
+            binding.tvTitle.text=item.videoItem?.title
+            binding.tvDescription.text=item.videoItem?.description
+            Glide.with(binding.root).load(item.videoItem?.thumbnailUrl.toString()).placeholder(R.drawable.ic_youtube).into(binding.ivThumbnail)
+            Glide.with(binding.root).load(item.videoItem?.thumbnailUrl.toString()).placeholder(R.drawable.ic_youtube).into(binding.SIVProfile)
+
+            itemView.setOnClickListener {
+                openYouTubeLink(item.videoItem?.videoUrl.toString(),itemView.context)
+            }
 
         }
 

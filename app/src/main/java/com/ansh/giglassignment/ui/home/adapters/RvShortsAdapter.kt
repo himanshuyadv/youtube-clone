@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ansh.giglassignment.R
 import com.ansh.giglassignment.data.models.ShortsItem
 import com.ansh.giglassignment.databinding.RvShortsItemLayoutBinding
+import com.ansh.giglassignment.utils.UrlUtils
 import com.bumptech.glide.Glide
 import java.util.Locale
 import java.util.regex.Matcher
@@ -40,7 +41,11 @@ class RvShortsAdapter : RecyclerView.Adapter<RvShortsAdapter.ShortsViewHolder>()
         binding.root
     ) {
         fun bind(item: ShortsItem) {
-            Glide.with(binding.root).load(item.thumbnailUrl.toString()).placeholder(R.drawable.ic_youtube).into(binding.vThumbnail)
+            Glide.with(binding.root).load(item.thumbnailUrl.toString()).placeholder(R.drawable.ic_youtube).into(binding.ivThumbnail)
+            binding.tvDescription.text=item.description
+            itemView.setOnClickListener {
+                UrlUtils.openYouTubeLink(item?.videoUrl.toString(), itemView.context)
+            }
         }
     }
 

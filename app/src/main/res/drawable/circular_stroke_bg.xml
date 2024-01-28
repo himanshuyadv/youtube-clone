@@ -1,0 +1,13 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <!-- Background color for the circle -->
+            <solid android:color="#00FF0000" /> <!-- Change this to your desired background color -->
+            <!-- Stroke for the circle -->
+            <stroke
+                android:width="1dp"
+                android:color="#000000"
+                />
+        </shape>
+    </item>
+</layer-list>

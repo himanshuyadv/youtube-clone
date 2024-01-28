@@ -9,16 +9,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:paddingVertical="@dimen/_8sdp">
 
         <TextView
-            android:drawableStart="@drawable/ic_youtube"
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Shorts"
+            android:drawableStart="@drawable/ic_youtube"
             android:drawablePadding="@dimen/_5sdp"
             android:gravity="center"
+            android:text="Shorts"
             android:textSize="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
