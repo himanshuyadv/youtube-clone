@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "625761733527",
+    "project_id": "clone-1ad19",
+    "storage_bucket": "clone-1ad19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625761733527:android:9386baa4e708274478d2d2",
+        "android_client_info": {
+          "package_name": "com.ansh.giglassignment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi334nKfL4vVzRz13ePUc6j7wjWcoMV48"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

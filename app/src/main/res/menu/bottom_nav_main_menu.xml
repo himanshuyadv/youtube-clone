@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:visible="true"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_shorts"
+        android:icon="@android:drawable/alert_dark_frame"
+        android:visible="true"
+        android:title="Shorts" />
+    <item
+        android:id="@+id/nav_addPost"
+        android:icon="@android:drawable/alert_dark_frame"
+        android:visible="true"
+        android:title="" />
+
+    <item
+        android:id="@+id/nav_subs"
+        android:icon="@android:drawable/alert_dark_frame"
+        android:visible="true"
+        android:title="Subscriptions" />
+
+    <item
+        android:id="@+id/nav_you"
+        android:icon="@android:drawable/alert_dark_frame"
+        android:visible="true"
+        android:title="You" />
+
+
+
+</menu>
