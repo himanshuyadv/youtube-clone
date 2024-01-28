@@ -12,8 +12,10 @@ import com.ansh.giglassignment.ui.home.viewmodel.HomeViewModel
 import com.ansh.giglassignment.utils.NetworkResult
 import com.ansh.giglassignment.utils.logEGlobal
 import com.ansh.giglassignment.utils.toastFragment
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var bindingHF: FragmentHomeBinding
@@ -28,25 +30,52 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun setRefreshing(isLoading:Boolean){
+        if (isLoading){
+            bindingHF.progressBar.visibility= View.VISIBLE
+            bindingHF.loader.visibility= View.VISIBLE
+            bindingHF.swipeRefreshLayout.isRefreshing=false
+        }else{
+            bindingHF.progressBar.visibility= View.INVISIBLE
+            bindingHF.loader.visibility= View.GONE
+            bindingHF.swipeRefreshLayout.isRefreshing=false
+        }
+    }
+
     private fun initObservers() {
 
         vmHome.responseTimeline.observe(viewLifecycleOwner) {
 
             when (it) {
                 is NetworkResult.Error -> {
+                    setRefreshing(false)
                     logEGlobal("error")
                     toastFragment(it.message.toString())
+
 
                 }
 
                 is NetworkResult.Loading -> {
                     logEGlobal("loading")
 
+                    if (it.data!=null){
+                        adapterTimeline.submitList(it.data)
+                    }else{
+                        toastFragment("error getting recommended list")
+                    }
+                    setRefreshing(true)
+
                 }
 
                 is NetworkResult.Success -> {
                     logEGlobal("success")
-                    adapterTimeline.submitList(it.data!!)
+
+                    setRefreshing(false)
+                    if (it.data!=null){
+                        adapterTimeline.submitList(it.data)
+                    }else{
+                        toastFragment("error getting recommended list")
+                    }
                 }
             }
 
@@ -56,6 +85,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
+
+        bindingHF.swipeRefreshLayout.setOnRefreshListener {
+
+            //   binding.swipeRefreshLayout.isRefreshing=false
+            vmHome.getTimelineData()
+
+        }
+
         bindingHF.rvTimeline.adapter = adapterTimeline
 
     }

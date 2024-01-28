@@ -84,7 +84,7 @@
                         app:layout_constraintEnd_toEndOf="@+id/ivNotification"
                         app:layout_constraintStart_toStartOf="@+id/ivNotification"
                         app:layout_constraintTop_toTopOf="@+id/ivNotification"
-                        tools:text="10" />
+                        android:text="5" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

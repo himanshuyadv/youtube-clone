@@ -31,22 +31,22 @@ class MyTypeConverters {
     }
 
     @TypeConverter
-    fun fromJSONToPostItem(json: String): PostItem {
+    fun fromJSONToPostItem(json: String): PostItem? {
         return Gson().fromJson(json, PostItem::class.java)
     }
 
     @TypeConverter
-    fun fromPostItemToJSON(list: PostItem): String {
-        return Gson().toJson(list)
+    fun fromPostItemToJSON(item: PostItem?): String {
+        return Gson().toJson(item)
     }
 
     @TypeConverter
-    fun fromJSONToVideoItem(json: String): VideoItem {
+    fun fromJSONToVideoItem(json: String): VideoItem? {
         return Gson().fromJson(json, VideoItem::class.java)
     }
 
     @TypeConverter
-    fun fromVideoItemToJSON(list: VideoItem): String {
-        return Gson().toJson(list)
+    fun fromVideoItemToJSON(item: VideoItem?): String {
+        return Gson().toJson(item)
     }
 }
