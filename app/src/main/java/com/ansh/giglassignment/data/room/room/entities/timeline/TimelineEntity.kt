@@ -12,7 +12,9 @@ data class TimelineEntity(
     val id: String,
     val itemType: Int,
     val name: String,
-    val shortsList: List<ShortsItem> = emptyList(),
+    val shortsList: List<ShortsItem>?=null,
     val postItem: PostItem? = null,
     val videoItem: VideoItem? = null
 )
+
+
