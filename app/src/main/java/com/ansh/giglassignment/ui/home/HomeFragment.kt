@@ -1,22 +1,24 @@
 package com.ansh.giglassignment.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ansh.giglassignment.data.models.PostItem
-import com.ansh.giglassignment.data.models.ShortsItem
-import com.ansh.giglassignment.data.models.TimelineItem
-import com.ansh.giglassignment.data.models.VideoItem
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.ansh.giglassignment.databinding.FragmentHomeBinding
-import com.ansh.giglassignment.ui.home.adapter.RvTimelineAdapter
+import com.ansh.giglassignment.ui.home.adapters.RvTimelineAdapter
+import com.ansh.giglassignment.ui.home.viewmodel.HomeViewModel
+import com.ansh.giglassignment.utils.NetworkResult
+import com.ansh.giglassignment.utils.logEGlobal
+import com.ansh.giglassignment.utils.toastFragment
 
 
 class HomeFragment : Fragment() {
 
-    private lateinit var bindingHF:FragmentHomeBinding
+    private lateinit var bindingHF: FragmentHomeBinding
     private val adapterTimeline by lazy { RvTimelineAdapter() }
+    private val vmHome by viewModels<HomeViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,26 +30,33 @@ class HomeFragment : Fragment() {
 
     private fun initObservers() {
 
-        val timelineItemList= mutableListOf<TimelineItem>()
-        val shortsItemList= mutableListOf<ShortsItem>()
-        shortsItemList.add(ShortsItem(""))
-        shortsItemList.add(ShortsItem(""))
-        shortsItemList.add(ShortsItem(""))
-        shortsItemList.add(ShortsItem(""))
-        shortsItemList.add(ShortsItem(""))
+        vmHome.responseTimeline.observe(viewLifecycleOwner) {
 
-        val postItem =PostItem("")
-        val videoItem=VideoItem("")
-        timelineItemList.add(TimelineItem("",RvTimelineAdapter.ITEM_TYPE_POST, "", emptyList(),postItem,null))
-        timelineItemList.add(TimelineItem("",RvTimelineAdapter.ITEM_TYPE_SHORTS,"" , shortsItemList,null,null))
-        timelineItemList.add(TimelineItem("",RvTimelineAdapter.ITEM_TYPE_VIDEO, "", emptyList(),null,videoItem))
-        timelineItemList.add(TimelineItem("",RvTimelineAdapter.ITEM_TYPE_POST, "", emptyList(),postItem,null))
-        adapterTimeline.submitList(timelineItemList)
+            when (it) {
+                is NetworkResult.Error -> {
+                    logEGlobal("error")
+                    toastFragment(it.message.toString())
+
+                }
+
+                is NetworkResult.Loading -> {
+                    logEGlobal("loading")
+
+                }
+
+                is NetworkResult.Success -> {
+                    logEGlobal("success")
+                    adapterTimeline.submitList(it.data!!)
+                }
+            }
+
+        }
+
 
     }
 
     private fun initView() {
-       bindingHF.rvTimeline.adapter=adapterTimeline
+        bindingHF.rvTimeline.adapter = adapterTimeline
 
     }
 
@@ -55,5 +64,5 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    )=FragmentHomeBinding.inflate(inflater,container,false).also { bindingHF=it }.root
+    ) = FragmentHomeBinding.inflate(inflater, container, false).also { bindingHF = it }.root
 }

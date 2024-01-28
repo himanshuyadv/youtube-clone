@@ -1,10 +1,15 @@
-package com.ansh.giglassignment.ui.home.adapter
+package com.ansh.giglassignment.ui.home.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ansh.giglassignment.R
 import com.ansh.giglassignment.data.models.ShortsItem
 import com.ansh.giglassignment.databinding.RvShortsItemLayoutBinding
+import com.bumptech.glide.Glide
+import java.util.Locale
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class RvShortsAdapter : RecyclerView.Adapter<RvShortsAdapter.ShortsViewHolder>() {
 
@@ -31,11 +36,12 @@ class RvShortsAdapter : RecyclerView.Adapter<RvShortsAdapter.ShortsViewHolder>()
 
     override fun getItemCount() = listShorts.size
 
-    inner class ShortsViewHolder(binding: RvShortsItemLayoutBinding) : RecyclerView.ViewHolder(
+    inner class ShortsViewHolder(val binding: RvShortsItemLayoutBinding) : RecyclerView.ViewHolder(
         binding.root
     ) {
         fun bind(item: ShortsItem) {
-
+            Glide.with(binding.root).load(item.thumbnailUrl.toString()).placeholder(R.drawable.ic_youtube).into(binding.vThumbnail)
         }
     }
+
 }

@@ -1,4 +1,4 @@
-package com.ansh.giglassignment.ui.home.adapter
+package com.ansh.giglassignment.ui.home.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
